@@ -119,20 +119,22 @@ module.exports = NodeHelper.create({
   getFiles(path, imageList, config) {
     const contents = FileSystemImageSlideshow.readdirSync(path);
     for (let i = 0; i < contents.length; i++) {
-      const currentItem = path + '/' + contents[i];
-      const stats = FileSystemImageSlideshow.lstatSync(currentItem);
-      if (stats.isDirectory() && config.recursiveSubDirectories) {
-        this.getFiles(currentItem, imageList, config);
-      } else if (stats.isFile()) {
-        const isValidImageFileExtension =
-          this.checkValidImageFileExtension(currentItem);
-          if (isValidImageFileExtension) {
-            imageList.push({
-              "path": currentItem, 
-              "created": stats.ctimeMs, 
-              "modified": stats.mtimeMs
-            });
-          }
+      if (contents[i][0]!='.') // Check that file is not hidden
+      {
+        const currentItem = path + '/' + contents[i];
+        const stats = FileSystemImageSlideshow.lstatSync(currentItem);
+        if (stats.isDirectory() && config.recursiveSubDirectories) {
+          this.getFiles(currentItem, imageList, config);
+        } else if (stats.isFile()) {
+          const isValidImageFileExtension = this.checkValidImageFileExtension(currentItem);
+            if (isValidImageFileExtension ) {
+              imageList.push({
+                "path": currentItem, 
+                "created": stats.ctimeMs, 
+                "modified": stats.mtimeMs
+              });
+            }
+        }
       }
     }
   },
