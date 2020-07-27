@@ -496,6 +496,8 @@ Module.register('MMM-BackgroundSlideshow', {
           }
           imageName = imageName.substring(0, imageName.lastIndexOf('.')); // Remove extension from display name
           imageName = imageName.replace(/\//g, " "); // Replace slashes with spaces
+          imageName = imageName.replace(/_/g, " "); // Replace underscores with spaces
+          imageName = imageName.replace(/-/g, " "); // Replace minus with spaces          
           imageProps.push(imageName);
           break;
         case 'imagecount':
