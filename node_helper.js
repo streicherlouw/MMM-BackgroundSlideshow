@@ -394,6 +394,10 @@ module.exports = NodeHelper.create({
     const contents = FileSystemImageSlideshow.readdirSync(imagePath);
     Log.info(`BACKGROUNDSLIDESHOW: Reading directory "${imagePath}" for images, found ${contents.length} files and directories`);
     for (let i = 0; i < contents.length; i++) {
+          // Skip hidden files and directories (those starting with ".")
+      if (contents[i].startsWith('.')) {
+        continue;
+      }
       if (this.excludePaths.has(contents[i])) {
         continue;
       }
