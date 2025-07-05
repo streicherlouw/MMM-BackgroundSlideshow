@@ -631,11 +631,11 @@ Module.register('MMM-BackgroundSlideshow', {
           }
           // Remove file extension from image name.
           if (this.config.imageInfoNoFileExt) {
-            imageName = imageName.substring(0, imageName.lastIndexOf('.'));
-            imageName = imageName.replace(/\//g, " "); // Replace slashes with spaces
-            imageName = imageName.replace(/_/g, " "); // Replace underscores with spaces
-            imageName = imageName.replace(/-/g, " "); // Replace minus with spaces          
+            imageName = imageName.substring(0, imageName.lastIndexOf('.'));          
           }
+          imageName = imageName.replace(/\//g, " "); // Replace slashes with spaces
+          imageName = imageName.replace(/_/g, " "); // Replace underscores with spaces
+          imageName = imageName.replace(/-/g, " "); // Replace minus with spaces
           imageProps.push(imageName);
           break;
         case 'imagecount':
