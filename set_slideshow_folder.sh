@@ -1,6 +1,6 @@
 #!/bin/bash
 path_to_images_prefix="\['modules\/MMM-BackgroundSlideshow\/"
-path_to_images_postfix="'\]\,"
+path_to_images_postfix="\/'\]\,"
 replacement=$1
 replacement=${replacement//\\/\\\\}
 replacement=${replacement//\//\\/}
