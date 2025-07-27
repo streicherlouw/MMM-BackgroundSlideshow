@@ -17,8 +17,6 @@ Install Magic Mirror:
 
 1: Install Base
 bash -c  "$(curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/raspberry.sh)"
-Answer no tp pm2 question
-sudo npm install pm2@latest -g
 
 3: Clone the fork of the slideshow module
 cd ~/MagicMirror/modules/
@@ -34,6 +32,8 @@ chmod +x set_slideshow_folder.sh
 12: Test the slideshow folder setting
 ./set_slideshow_folder.sh Art
 pm2 save
+
+sudo raspi-config > Turn off screen blanking
 
 
 Install Homebridge:
@@ -87,14 +87,14 @@ The Commands for switching art screen is:
 sudo apt-get install samba samba-common-bin
 sudo nano /etc/samba/smb.conf
 ADD >>> 
-[photoframe]
-path = /home/pi/MagicMirror/modules/MMM-BackgroundSlideshow
+[ArtWall1]
+path = /home/streicher/MagicMirror/modules/MMM-BackgroundSlideshow
 writeable=Yes
 create mask=0777
 directory mask=0777
 public=no
 
-sudo smbpasswd -a pi
+sudo smbpasswd -a streicher
 sudo systemctl restart smbd
 
 
