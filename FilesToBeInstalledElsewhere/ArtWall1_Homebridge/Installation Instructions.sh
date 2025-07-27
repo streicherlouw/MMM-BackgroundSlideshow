@@ -2,10 +2,11 @@ Installation Instructions
 
 Install OS:
 
-1: Flash Raspberry Pi 64 Bit OS with https://www.raspberrypi.com/software/
-2: Set Hostname in Rasberry Pi configuration
-3: Sign in Raspberry Pi Connect service
-4: Set Descktop image to none and menu to medium
+
+1: Set Hostname in Rasberry Pi configuration with https://www.raspberrypi.com/software/
+2: Flash Raspberry Pi 64 Bit OS  
+3: Sign in Raspberry Pi Connect service on the Pi screen
+4: Set Desktop image to none and menu to medium
 5: Update Pi OS with 
 
 sudo apt update
@@ -16,8 +17,10 @@ Install Magic Mirror:
 
 1: Install Base
 bash -c  "$(curl -sL https://raw.githubusercontent.com/sdetweil/MagicMirror_scripts/master/raspberry.sh)"
+Answer no tp pm2 question
+sudo npm install pm2@latest -g
 
-3: Clone the form of the slideshow module
+3: Clone the fork of the slideshow module
 cd ~/MagicMirror/modules/
 git clone https://github.com/streicherlouw/MMM-BackgroundSlideshow
 cd ~/MagicMirror/modules/MMM-BackgroundSlideshow
@@ -25,6 +28,13 @@ npm install
 npm audit fix
 
 5: Copy Photo and Artwork Folders to ~/MagicMirror/modules/MMM-BackgroundSlideshow/
+cp ~/MagicMirror/modules/MMM-BackgroundSlideshow/FilesToBeInstalledElsewhere/MagicMirror/set_slideshow_folder.sh ~/MagicMirror/
+cp ~/MagicMirror/modules/MMM-BackgroundSlideshow/FilesToBeInstalledElsewhere/MagicMirror/config/config_Artwall1.js ~/MagicMirror/config/config.js
+chmod +x set_slideshow_folder.sh
+12: Test the slideshow folder setting
+./set_slideshow_folder.sh Art
+pm2 save
+
 
 Install Homebridge:
 
@@ -62,5 +72,29 @@ AmbientCapabilities=CAP_NET_BIND_SERVICE CAP_NET_RAW CAP_NET_ADMIN
 [Install]
 WantedBy=multi-user.target
 ***SNIP***
+
+sudo reboot
+
+The Commands for switchign wayland HDMI on an off with id prodided by "id -u streicher"
+XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/wlr-randr --output HDMI-A-1 --on
+XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/wlr-randr --output HDMI-A-1 --off
+
+The Commands for switching art screen is:
+~/MagicMirror/set_slideshow_folder.sh Art
+
+#Install Samba
+
+sudo apt-get install samba samba-common-bin
+sudo nano /etc/samba/smb.conf
+ADD >>> 
+[photoframe]
+path = /home/pi/MagicMirror/modules/MMM-BackgroundSlideshow
+writeable=Yes
+create mask=0777
+directory mask=0777
+public=no
+
+sudo smbpasswd -a pi
+sudo systemctl restart smbd
 
 

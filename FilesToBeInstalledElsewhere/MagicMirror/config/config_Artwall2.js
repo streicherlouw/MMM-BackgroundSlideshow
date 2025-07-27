@@ -44,16 +44,25 @@ var config = {
 			position: "top_bar",
 		},*/
 		{
-			module: "weather",
-			position: "top_right",
-			config: {
-				type: 'current',
-				weatherProvider: 'openweathermap',
-				locationID: 7839803,
-				apiKey: '2abd2e26730f6cb58e0d8b6733a92fae',
-				apiVersion: '2.5',
-				weatherEndpoint: '/weather',
-			}
+				module: "weather",
+				position: "top_right",
+				config: {
+						weatherProvider: "openmeteo",
+						type: "current",
+						lat: -37.7813,
+						lon: 144.8327
+				}
+		},
+		{
+				module: "weather",
+				position: "top_right",
+				header: "Weather Forecast",
+				config: {
+						weatherProvider: "openmeteo",
+						type: "forecast",
+						lat: -37.7813,
+						lon: 144.8327
+				}
 		},
 		{
 			module: 'MMM-BackgroundSlideshow',
