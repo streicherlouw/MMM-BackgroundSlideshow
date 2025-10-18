@@ -28,7 +28,9 @@ npm audit fix
 5: Copy Photo and Artwork Folders to ~/MagicMirror/modules/MMM-BackgroundSlideshow/
 cp ~/MagicMirror/modules/MMM-BackgroundSlideshow/FilesToBeInstalledElsewhere/MagicMirror/set_slideshow_folder.sh ~/MagicMirror/
 cp ~/MagicMirror/modules/MMM-BackgroundSlideshow/FilesToBeInstalledElsewhere/MagicMirror/config/config_Artwall1.js ~/MagicMirror/config/config.js
+cd ~/MagicMirror
 chmod +x set_slideshow_folder.sh
+
 12: Test the slideshow folder setting
 ./set_slideshow_folder.sh Art
 pm2 save
@@ -75,9 +77,10 @@ WantedBy=multi-user.target
 
 sudo reboot
 
-The Commands for switchign wayland HDMI on an off with id prodided by "id -u streicher"
-XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/wlr-randr --output HDMI-A-1 --on
-XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/wlr-randr --output HDMI-A-1 --off
+The Commands for switchign wayland HDMI on an off 
+
+echo "off" | sudo tee /sys/class/drm/card1-HDMI-A-1/status
+echo "on" | sudo tee /sys/class/drm/card1-HDMI-A-1/status
 
 The Commands for switching art screen is:
 ~/MagicMirror/set_slideshow_folder.sh Art
